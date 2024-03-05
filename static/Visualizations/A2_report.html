@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Vis & Society Assignment 2</title>
+	<link rel="stylesheet" href="https://vis-society.github.io/assignments/report.css" />
+	<link href="style.css" rel="stylesheet"/>
+</head>
+
+<body>
+	<header>
+		<h1>
+			<small>Assignment 2</small>
+			Exploratory Data Analysis
+		</h1>
+
+		<p>
+			<strong>Khadija Ghanizada</strong> — <em>kg7952@mit.edu</em>
+		</p>
+	</header>
+	<main>
+		<section>
+			<h2>Subtheme: Visualizing Exclusionary Zoning </h2>
+
+		<h2>Dataset</h2>Dataset
+
+		<p>This dataset, derived from MAPC's Zoning Atlas and integrating data from diverse sources, provides a comprehensive understanding of housing zoning dynamics and demographic profiles within the Metro Boston area.
+			It combines spatial and tabular data pertaining to zoning districts within the 101 municipalities of the MAPC region, specifically focusing on Metro Boston, categorizing areas based on whether they are designated 
+			solely for single-family housing or for other types of housing.The dataset also aggregates demographic and income data from census sources, offering insights into population characteristics and household incomes 
+			within these zoning areas. MassGIS contributes municipal boundary data, defining the geographical extents of each municipality, while the census boundary areas are from the year 2010. Demographic information, 
+			including population distribution and ethnicity, is sourced from the US Census and ACS, with general population and housing characteristics by blocks from the US Census in 2010. Additionally, income data from the
+			ACS, aggregated at the block group level, is from the years 2014-2018. There are some rows for some municipalities to show municipalities that have only single-family zoning and other housing zoning.</p>
+			
+		<p>I’m interested in this dataset because single family zoning is the most restrictive and extructionary form of zoning. It does not allow for the building of other types of housing.  This dataset will allow me to 
+			visualize exclusionary zoning in Metro Boston comparing the communities that have the highest rates of this zoning.  As an urban planning student I understand that the “yard and picket fence” type of housing in 
+			the U.S. affects housing affordability, equity, and transportation in a negative way. However, single-family zoning still continues. I’m interested in exploring the data through the framework of the questions below. 
+			</p>
+
+			<h3>Overall Analysis Questions</h3>
+			<ol>
+				
+				<li> Which neighborhoods have the most single-family zoning in the Boston area?</li>
+				<li> Which neighborhoods provide opportunities for change such as adding the “missing middle” type of housing?</li>
+				<li> What type of demographic lives in the single-family housing zoning areas? </li>
+				<li> What is the average household size in the single-family housing zoning neighborhoods?</li>
+				<li> What is the average household income in the single-family housing zoning neighborhood? </li>
+			</ol>
+
+			<h3>Motivation</h3>
+			<p>As an urban planning student immersed in the complexities of housing affordability and zoning regulations, my motivation to investigate exclusionary zoning practices is multifaceted and informed by both academic and 
+			   real-world insights. Through coursework in planning economics and urban design studios, supplemented by experiences such as site visits and discussions during my urban design class, I've gained a comprehensive 
+			   understanding of how exclusionary zoning perpetuates housing inequities, particularly in affluent suburban communities like those in Greater Boston. Additionally, insights gleaned from articles like "Living Little" 
+			   and the Washington Post's "Houses are too expensive. Apartments are too small. Is this a fix?" have further enriched my perspective. The "Living Little" article emphasizes the transformative potential of diverse housing
+			   typologies, such as accessory dwelling units and cottage housing, in addressing housing shortages while preserving the character of suburban communities. Similarly, the Washington Post talked about the success story of  
+			   Arlington, Virginia changing their zoning laws to include the “missing middle” type of housing. </p>
+
+			<p> Furthermore, these articles underscored the imperative of community engagement and advocacy in addressing housing inequities. They emphasize the importance of amplifying marginalized voices and challenging entrenched power 
+				structures that perpetuate housing segregation and exclusion. My motivation, therefore, extends beyond academic curiosity to commitment to social justice and equitable urban development. From many tours I have been to my urban 
+				design class my professors always pointed out how hard it was for them as practitioners to get taller apartment buildings implemented in their plans due to zoning issues and the communities always being against it arguing that 
+				it will affect the sunlight, and make their neighborhood less friendly. And usually people who are fighting this are the wealthier people in the community with single-family housing. Since that class I have been wanting to explore 
+				this topic in depth. At the same time, the Washington Post comic below talked about the different types of housing such as the “missing middle” type of housing. Perhaps this could be a solution for people who are arguing against
+				taller apartments blocking the sun and making the neighborhood dense and child friendly. Besides, it is very disheartening to watch people sleep on the streets on the cold nights of winter while as an urban planner I know that the 
+				solution could be fixed if the local government was pushed to change the zoning laws to create more housing for people, to increase the supply for affordable housing and to provide people the opportunity to stay where they grew up.
+				</p>
+		</section>
+
+		<section>
+			<h2>Discoveries & Insights</h2>
+
+			<p>After the first phase of gaining an overview of the shape and structure of the dataset. I assessed the quality of data. I first explored the spatial coverage of the dataset by mapping it in GIS as well as Tableau. I also tried exploring 
+			   the different parts of the attribute table such as the demographics, size of households and income in Tableau. After carefully looking at the metadata, the dataset and these initial exploratory analysis I dived into analyzing the data as 
+			   best as I could to answer our analysis questions. 
+			</p>
+
+			<figure>
+
+				<img 
+				class="fit-picture"
+				src="Fig 1.png" alt="" />
+				<figcaption>
+				This map created in GIS shows the distribution of single family housing zones in the Boston metropolitan area. The blue shows the single family housing zones so this means that according to the zoning laws only single-family housing 
+				can be built there. The white shows that other types of housing is permissible according to the zoning laws but that does not mean that single family housing cannot be built there. It could be possible that the white areas also have a higher 
+				percentage of single family housing. At the same time, the map highlights a clear clustering of single-family zones in the suburbs, while the city center does not have the exclusionary zoning laws. 
+
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img 
+				class="fit-picture"
+				src="Fig 2.png" alt="" />
+				<figcaption>
+				This bubble diagram created in Tableau illustrates the average percentage of single-family house zoning by size and the color of each municipality on the map represents the sum of its population. There is a weak positive correlation 
+				between the average percentage of single-family house zoning and the municipality's population, with larger municipalities tending to have a higher percentage of single-family house zoning. However, there are some exceptions, such as Waltham, 
+				Weymouth, and Peabody which all have relatively high percentages of single-family house zoning despite having a relatively small population.
+
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img 
+				class="fit-picture"
+				src="Fig 3.png" alt="" />
+				<figcaption>
+				This analysis attempts to answer the question “Which neighborhoods have the most single-family zoning in the Boston area?” This analysis was conducted in Tableau by putting the average percentage of single family for each municipality 
+				in the columns and rows in Tableau and filtering the only single family data which keeps 1 meaning that that area does have single family housing zoning laws. I went one step further to also include population density in this illustration by 
+				encoding it into the color. The dark colors show higher population density while the lighter ones show lower population density. It was surprising to see that so many places in the greater Boston area have exclusionary zoning laws. I chose to 
+				have the data represented in a vertical format because it  has a negative impact on affordable housing. It will be important to explore why and how single-family zoning persists in the greater Boston area? What are the causes? Is it income levels,
+				demographics of people that want single family homes and are fighting for it, big corporations, landlords trying to keep the rents high or is it a shortcoming of the government? 
+
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img 
+				class="fit-picture"
+				src="Fig 4.png" alt="" />
+				<figcaption>
+			Following up on the previous question that answered the neighborhoods that have single family house zoning, this illustration aimed to answer “Which neighborhoods provide opportunities for change such as adding the “missing middle” type of
+			housing?” This analysis was conducted in Tableau by putting the average percentage of single family for each municipality in the columns and rows in Tableau and filtering the only single family data which keeps 0 meaning that that area does not have 
+			single family housing zoning laws. I went one step further to also include population density in this illustration by encoding it into the color. The dark colors show higher population density while the lighter ones show lower population density. 
+			Although the illustration does not seem useful the list provided helps identify neighborhoods in the greater Boston area to add “missing middle” type housing or living little type of housing. 
+
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img 
+				class="fit-picture"
+				src="Fig 5.png" alt="" />
+				<figcaption>
+			This scatter plot was created using Tableau. It attempted to answer the question “What type of demographic lives in the single-family housing zoning areas?”  It shows the population of Non-Hispanic African American and Only Single Family houses zoning.
+			Each dot represents a municipality, and the size of the dot corresponds to the municipality's total population of Non-Hispanic African Americans. This illustrates that there is a higher population density of Non-Hispanic African Americans in Randolph and then after 
+			that Millis. However, this was not a comprehensive method to look at the demographics of different neighborhoods. I was not able to include different demographics in analysis due to the structure of the data. This limitation led to create a smaller data set and analyzing it below. 
+
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img 
+				class="fit-picture"
+				src="Fig 6.png" alt="" />
+				<figcaption>
+			This illustration conducted in Tableau shows a comparison between the municipalities in relation to the different demographics that reside there. This analysis was conducted as a follow up to the illustration above which only shows the population density of 
+			one specific demographic Non-Hispanic African Americans across the different municipalities. This illustration was created with a different data set extracted from the dataset provided and rearranged and restructured to be able to create this visualization in Tableau.
+			Since the dataset included around 101 municipalities I was not able to rearrange all of the dataset due to time limitations so I chose a few municipalities closer to the center of the city. According to this illustration there is a big population of Non-Hispanic whites,
+			Hispanic or Latino population, Non-Hispanic Black or African Americans, and Non-Hispanic Asian population in Boston city itself which does not have the single family house zoning laws. However, this makes sense because there are different universities in Boston and Boston 
+			is more diverse than the rest of the municipalities in the chart above. This is because most people tend to live in cities for employment, school and other opportunities. This chart also shows that non-hispanic whites are the dominant group accorse the municipalities compared 
+			above and a higher population of non-hispanic whites live in single family house zoning neighborhoods. 
+
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img 
+				class="fit-picture"
+				src="Fig 7.png" alt="" />
+				<figcaption>
+			This shows the same information as the chart above but in a much clearer way. I think this illustration does a great job of showing the population density of Non-Hispanic Whites throughout the municipalities, specifically throughout the municipalities with exclusionary 
+			housing zoning laws. However, it will be much more comprehensive to take a look at the demographics across all municipalities. And to also see if there is a clear correlation between demographics and income levels as well as the exclusionary zoning laws? 
+
+
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img 
+				class="fit-picture"
+				src="Fig 8.png" alt="" />
+				<figcaption>
+			This map created in GIS illustrates the answer to the question, “What is the household size in the single-family housing zoning neighborhoods?” The blue shows the single family housing zones and the white shows municipalities where other types of housing is allowed 
+			according to the zoning codes. The red circles show the size of the family households in all of these municipalities. I think this map does more than just show the size of family households in municipalities where single family housing zoning laws exist, but nevertheless it 
+			looks like a higher number of family households are getting closer to the city center. However, this illustration can be visually crowded. Therefore, I decided to create two other illustrations in Tableau to make it easier to understand. 
+
+
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img 
+				class="fit-picture"
+				src="Fig 9.png" alt="" />
+				<figcaption>
+			This illustration created in Tableau shows family households in single family house zoning neighborhoods and municipalities that allow other types of housing. Here the size of the circles shows the population of the family households and the color shows whether it is a
+			single family housing zone or other types of housing zone. The dark blue shows exclusionary housing zones and the light blue shows zones that allow other types of housing. Here the higher population of family households live in Boston and in areas where other types of housing is allowed.
+			However, one can also see that a population of family households also live in places where only single family housing is permissible according to the zoning codes. It would be interesting to explore the relationship between the size of single family households and the exclusionary zoning
+			neighborhoods. For example, what the correction would be between the two if the size of the family household was 5 or higher compared to 2?
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img 
+				class="fit-picture"
+				src="Fig 10.png" alt="" />
+				<figcaption>
+			This illustration created in Tableau shows non-family households in single family house zoning neighborhoods and municipalities that allow other types of housing. Here the size of the circles shows the population of the non-family households and the color shows whether it is a
+			single family housing zone or other types of housing zone. The dark blue shows exclusionary housing zones and the light blue shows zones that allow other types of housing. Here we can see a clear difference. A higher population of non-family households live in Boston and places very close 
+			to Boston while a small number of people live in places away from the center of the city. Also a higher number of people live in municipalities that according to the zoning laws other types of housing is allowed, while a small percentage of people live in neighborhoods that have strictly 
+			only single family housing zones. However, this trend is not as surprising as the higher percentage of non-family households can also be college students and young people living in Boston for college or work. 
+
+
+				</figcaption>
+			</figure>
+		</section>
+
+
+		<figure>
+			<img 
+			class="fit-picture"
+			src="Fig 11.png" alt="" />
+			<figcaption>
+		This map created in GIS helps answer the question, “What is the average household income in the single-family housing zoning neighborhood?” In this illustration the blue polygons show the municipalities that only have single family house zoning, while the white shows neighborhoods 
+		where other types of housing is permissible. The red circles represent the number of households with income under $10,000. This shows that a higher percentage of the population makes less than $10,000 closer to the city while a small number of people have an income under $10,000. This was surprising
+		to me because the cost of living in Boston is very expensive, under $10,000 cannot even cover the cost of rent in Boston for a college student living in a dorm. How are these people paying for their rent, food, and other necessities? 
+
+			</figcaption>
+		</figure>
+	</section>
+
+	<figure>
+		<img 
+		class="fit-picture"
+		src="Fig 12.png" alt="" />
+		<figcaption>
+		This figure created in Tableau also attempts to answer the question, “What is the average household income in the single-family housing zoning neighborhood?” This bar chart shows households with income $200,000 or higher. The color of the bars corresponds to only single family housing zones and other 
+		types of housing zones. The dark blue shows municipalities with only single family housing zones and the light blue shows the municipalities that allow other types of housing. This illustration is similar to the illustration above as the majority of people making more than $200,000 or higher are in Boston 
+		which makes sense since it is the city and the hub of these big corporations, firms, etc. However, this chart and the map above illustrated the clear economic division that exists between populations in the Boston area. There are a lot of people that are making $200,000 or higher and there are a lot of people
+		that are making under $10,000. And it seems like the cost of living and housing is in Boston and greater Boston mostly reflects people with a higher income. Now again, I was not able to make a comparison of all different household income levels in one chart in relation to the municipalities and zoning laws due
+		to the structure of the data. However, it would be interesting to see the correlation between households with a higher income level and single family housing zones across the municipalities in the greater Boston area? 
+
+
+		</figcaption>
+	</figure>
+</section>
+
+		<section>
+			<h2>Summary</h2>
+
+			<p>The analysis of the dataset on housing zoning dynamics in the Metro Boston area reveals significant insights into exclusionary zoning practices and their socio-economic implications. Single-family zoning emerges as a predominant feature, particularly concentrated in suburban regions, highlighting disparities
+			   in housing accessibility. Demographic analysis suggests correlations between zoning laws and population compositions, with areas under single-family zoning often exhibiting higher proportions of non-Hispanic white populations. Income disparities are also evident, with affluent neighborhoods allowing diverse 
+			   housing types while still harboring pockets of low-income households. Despite these challenges, this exploration of the data identifies opportunities for change, emphasizing the potential for introducing diverse housing typologies like the "missing middle" housing in less restrictive zoning areas. However, 
+			   data limitations and lack of structure underscore the need for more comprehensive demographic representation and income analysis across all municipalities. Overall, the findings underscore the complex interplay between zoning regulations, demographics, and socio-economic factors, highlighting the importance 
+			   for inclusive urban planning strategies to address housing inequities in metropolitan regions like Boston.
+
+			</p>
+		</section>
+	</main>
+</body>
+</html>
