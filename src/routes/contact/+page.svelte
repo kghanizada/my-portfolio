@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Contact me</title>
+</svelte:head>
+
 <script>
     // You can add any JavaScript logic here if needed
   </script>
