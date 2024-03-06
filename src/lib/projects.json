@@ -2,15 +2,15 @@
     {
     
         "title": "Assignment 2: Exploratory Data Analysis",
-        "image": "../Visualizations/Fig 8.png",
+        "image": "Visualizations/Fig 8.png",
         "description": "This project focuses on exploaring and analyszing the Exclusionary Zoning in the greater Boston area through different visualizations",
-        "url": "../Visualizations/A2_report.html"
+        "url": "Visualizations/A2_report.html"
     },
     {
         "title": "Assignment 3: Visualization Design",
-        "image": "../A3/Fig 4.jpg",
+        "image": "A3/Fig 4.jpg",
         "description": "This project answers the question, How has the distribution of population across different age groups changed from 1900 to 2000 in the United States, broken down by sex?",
-        "url": "../A3/A3_report.html"
+        "url": "A3/A3_report.html"
     },
 
     {
