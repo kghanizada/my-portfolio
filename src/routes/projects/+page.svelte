@@ -4,18 +4,14 @@
 
 <script>
     import projects from '$lib/projects.json';
+    import Project from "$lib/Project.svelte";
 </script>
 
 <main>
     <h1>My Projects ({ projects.length })</h1>
     <div class="projects">
             {#each projects as p}
-                <article>
-                    <a href={p.url}>
-                    <h2>{p.title}</h2>
-                    <img class="fit-picture" src={p.image} alt="">
-                    <p>{p.description}</p>
-                </article>
+            <Project info={p}/>
             {/each}
         </div>
 </main>
