@@ -139,9 +139,10 @@ label {
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 20px
 }
 
-projects article {
+.projects article {
   display: grid;
   grid-template-rows: subgrid;
 }
@@ -150,8 +151,16 @@ projects article {
   grid-row: span 3; 
 }
 
+
+.projects article {
+  margin-bottom: 20px; /* Add margin at the bottom of each article */
+  min-height: 200px; /* Set a minimum height for each article */
+}
+
 .projects article h2 {
   margin: 0;
+  margin-bottom: 20px; /* Add margin at the bottom of each article */
+  min-height: 200px; /* Set a minimum height for each article */
 }
 
 

@@ -26,7 +26,7 @@ for (let p of pages) {
 	let title = p.title;
 	// TODO create link and add it to nav
 	
-    url = !ARE_WE_HOME && !url.startsWith("http") ? "../" + url : url;
+    //url = !ARE_WE_HOME && !url.startsWith("http") ? "../" + url : url;
 
 	let a = document.createElement("a");
 	a.href = url;
