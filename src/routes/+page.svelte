@@ -28,6 +28,6 @@
 
 <div class="projects">
     {#each projects.slice(0, 2) as project}
-		<Project info={project} hLevel=2/>
+		<Project info={project} hLevel=3/>
     {/each}
 </div>
