@@ -5,13 +5,13 @@ function $$ (selector, context = document) {
 }
 
 
-let pages = [
-    {url: ".", title: "Home"}, // Adjusted homepage URL
-    {url: "projects", title: "Projects"}, // Removed .html extension
-    {url: "resume", title: "Resume"}, // Removed .html extension
-    {url: "contact", title: "Contact"} // Removed .html extension
+//let pages = [
+   // {url: ".", title: "Home"}, // Adjusted homepage URL
+  //  {url: "projects", title: "Projects"}, // Removed .html extension
+  //  {url: "resume", title: "Resume"}, // Removed .html extension
+  //  {url: "contact", title: "Contact"} // Removed .html extension
     // add the rest of your pages here
-];
+//];
 
 
 const ARE_WE_HOME = document.documentElement.classList.contains("home");
