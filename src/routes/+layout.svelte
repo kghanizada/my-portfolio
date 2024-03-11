@@ -12,6 +12,10 @@
   {url: "./contact", title: "Contact"}
  ];
  
+ let root = globalThis?.document?.documentElement;
+ $: root?.style.setProperty("color-scheme", colorScheme);
+
+
  let colorScheme = "light dark";
  
  // Step 1.4: Reading the color scheme from local storage
