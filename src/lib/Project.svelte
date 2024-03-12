@@ -28,13 +28,13 @@ article {
 
 article {
   margin-bottom: 20px; /* Add margin at the bottom of each article */
-  min-height: 200px; /* Set a minimum height for each article */
+  min-height: 80px; /* Set a minimum height for each article */
 }
 
 h2,h3 {
   margin: 0;
   margin-bottom: 20px; /* Add margin at the bottom of each article */
-  min-height: 200px; /* Set a minimum height for each article */
+  min-height: 50px; /* Set a minimum height for each article */
 }
 
 a{
