@@ -2,7 +2,17 @@
     // Add any JavaScript logic or data fetching here
     import projects from '$lib/projects.json';
     import Project from "$lib/Project.svelte";
-    let profileData = fetch("https://api.github.com/users/your-username");
+    let profileData = {
+	ok: true,
+	json: async () => ({
+		followers: 100,
+		following: 100,
+		public_repos: 100,
+		public_gists: 100,
+	})
+};
+    
+    //fetch("https://api.github.com/users/your-username");
 
 
 </script>
@@ -15,6 +25,25 @@
         max-width: 100%;
         height: auto;
     }
+
+/* My github stats */
+    .profile-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.profile-stats div {
+    grid-row: span 2;
+}
+
+.profile-stats dt {
+    grid-row: 1;
+}
+
+.profile-stats dd {
+    grid-row: 2;
+}
+
 
 </style>
 
