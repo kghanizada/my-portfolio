@@ -1,32 +1,56 @@
 <script>
     import * as d3 from 'd3';
     let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+    
+    export let data = [];
+    export let selectedIndex = -1;
 
-   
-let data = [
-    { value: 1, label: "apples" },
-    { value: 2, label: "oranges" },
-    { value: 3, label: "mangos" },
-    { value: 4, label: "pears" },
-    { value: 5, label: "limes" },
-    { value: 5, label: "cherries" }
-];
+    
 
 let sliceGenerator = d3.pie().value(d => d.value);
-let arcData = sliceGenerator(data);
-let arcs = arcData.map(d => arcGenerator(d));
-let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
+// Declare variables
+   let arcData = [];
+  let arcs = [];
+  let colors = d3.scaleOrdinal(d3.schemeTableau10);
+
+  // Use a reactive statement to recalculate arcData and arcs when data changes
+  $: {
+    arcData = d3.pie().value(d => d.value)(data);
+    arcs = arcData.map(d => arcGenerator(d));
+  }
+
+
+  function toggleWedge(index, event) {
+        // Check if the event is triggered by Enter key or if event.key doesn't exist (for mouse click)
+        if (!event.key || event.key === "Enter") {
+            selectedIndex = selectedIndex === index ? -1 : index;
+        }
+    }
 
 </script>
 
 <main>
     <div class="container">
         <svg viewBox="-50 -50 100 100">
-            {#each arcs as arc, i}
-                <path d={ arc } fill={ colors(i) } />
+            {#each arcs as arc, index}
+             <path 
+                    d={arc} 
+                    fill={colors(index)}
+                    class:selected={selectedIndex === index}
+                    style="
+                        --start-angle: { arc.startAngle }rad;
+                        --end-angle: { arc.endAngle }rad;"
+                    tabindex="0"
+                    role="button"
+                    aria-label={`Select ${data[index].label}`}
+                    on:click={e => toggleWedge(index, e)}
+                    on:keyup={e => toggleWedge(index, e)}
+                />
             {/each}
+            
         </svg>
+
         <ul class="legend">
             {#each data as d, index}
                 <li style="--color: { colors(index) }">
@@ -36,6 +60,8 @@ let colors = d3.scaleOrdinal(d3.schemeTableau10);
             {/each}
         </ul>
     </div>
+
+
 </main>
 
 <style>
@@ -55,6 +81,23 @@ let colors = d3.scaleOrdinal(d3.schemeTableau10);
         margin-block: 2em;
         /* Do not clip shapes outside the viewBox */
         overflow: visible;
+    }
+
+    svg:has(path:hover) path:not(:hover) {
+    opacity: 0.5;
+    }
+
+    /* Add transition effect */
+    path {
+    transition: opacity 0.3s ease; /* Adjust timing and easing as needed */
+    /* Calculate angle and midpoint angle */
+  --angle: calc(var(--end-angle) - var(--start-angle));
+  --mid-angle: calc(var(--start-angle) + var(--angle) / 2);
+}
+    
+
+    path:focus {
+        outline: none;
     }
 
     .legend {
@@ -83,4 +126,35 @@ let colors = d3.scaleOrdinal(d3.schemeTableau10);
         border-radius: 50%;
         display: inline-block;
     }
+
+    /* Pie.svelte CSS */
+
+.selected {
+  --color: oklch(60% 45% 0) !important; /* Choose your desired color */
+
+  /* Apply color to the selected wedge */
+  &:is(path) {
+    fill: var(--color);
+  }
+
+  transform: 
+    rotate(var(--mid-angle)) translateY(-6px) scale(1.1) rotate(calc(-1 * var(--mid-angle)));
+}
+
+/* Apply cursor pointer to make wedges clickable */
+path {
+  cursor: pointer;
+}
+
+svg:has(path:hover, path:focus-visible) {
+        path:not(:hover, :focus-visible) {
+            opacity: 50%;
+        }
+    }
+
+
+
+
+
+
 </style>
