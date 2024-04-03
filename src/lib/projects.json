@@ -1,87 +1,90 @@
 [
-    {
+{
     
-        "title": "Assignment 2: Exploratory Data Analysis",
-        "year": "2024",
-        "image": "Visualizations/Fig 8.png",
-        "description": "This project focuses on exploaring and analyszing the Exclusionary Zoning in the greater Boston area through different visualizations",
-        "url": "Visualizations/A2_report.html"
-    },
-    {
-        "title": "Assignment 3: Visualization Design",
-        "year": "2024",
-        "image": "A3/Fig 4.jpg",
-        "description": "This project answers the question, How has the distribution of population across different age groups changed from 1900 to 2000 in the United States, broken down by sex?",
-        "url": "A3/A3_report.html"
-    },
+"title": "Assignment 2: Exploratory Data Analysis",
+"year": "2024",
+"image": "Visualizations/Fig 8.png",
+"description": "This project focuses on exploaring and analyszing the Exclusionary Zoning in the greater Boston area through different visualizations",
+"url": "Visualizations/A2_report.html"
+},
 
-    {
-		"title": "Assignment 4: Persuasive or Deceptive Visualization?",
-        "year": "2024",
-		"image": "A4/Fig 1.jpg",
-		"description": "This project explores how visualization can be persuasive or deceptive.",
-        "url":"A4/A4_report.html"
-	},
-	{
-		"title": "Architecto minima sed omnis?",
-        "year": "2023",
-		"image": "https://vis-society.github.io/labs/2/images/empty.svg",
-		"description": "Est, reiciendis aspernatur debitis maxime et itaque animi sit quod quo, tempore incidunt tempora dignissimos exercitationem enim numquam quam quaerat optio laborum ut unde hic delectus laboriosam? Quasi, cupiditate corporis."
-	},
+{
+"title": "Assignment 3: Visualization Design",
+"year": "2024",
+"image": "A3/Fig 4.jpg",
+"description": "This project answers the question, How has the distribution of population across different age groups changed from 1900 to 2000 in the United States, broken down by sex?",
+"url": "A3/A3_report.html"
+},
 
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "year": "2022",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
-    },
+{
+"title": "Assignment 4: Persuasive or Deceptive Visualization?",
+"year": "2024",
+"image": "A4/Fig 1.jpg",
+"description": "This project explores how visualization can be persuasive or deceptive.",
+"url":"A4/A4_report.html"
+},
 
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "year": "2021",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
-    },
+{
+"title": "Architecto minima sed omnis?",
+"year": "2023",
+"image": "https://vis-society.github.io/labs/2/images/empty.svg",
+"description": "Est, reiciendis aspernatur debitis maxime et itaque animi sit quod quo, tempore incidunt tempora dignissimos exercitationem enim numquam quam quaerat optio laborum ut unde hic delectus laboriosam? Quasi, cupiditate corporis."
+},
 
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "year": "2022",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
-    },
+{
+"title": "Architecto minima sed omnis?",
+"year": "2022",
+"image": "https://vis-society.github.io/labs/2/images/empty.svg",
+"description": "Est, reiciendis aspernatur debitis maxime et itaque animi sit quod quo, tempore incidunt tempora dignissimos exercitationem enim numquam quam quaerat optio laborum ut unde hic delectus laboriosam? Quasi, cupiditate corporis."
+},
+    
 
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "year": "2023",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
-    },
+{
+"title": "Lorem ipsum dolor sit.",
+"year": "2021",
+"image": "https://vis-society.github.io/labs/2/images/empty.svg",
+"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
+},
 
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "year": "2023",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
-    },
+{
+"title": "Lorem ipsum dolor sit.",
+"year": "2022",
+"image": "https://vis-society.github.io/labs/2/images/empty.svg",
+"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
+},
 
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "year": "2023",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
-    },
+{
+"title": "Lorem ipsum dolor sit.",
+"year": "2023",
+"image": "https://vis-society.github.io/labs/2/images/empty.svg",
+"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
+},
 
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "year": "2021",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
-    },
+{
+"title": "Lorem ipsum dolor sit.",
+"year": "2023",
+"image": "https://vis-society.github.io/labs/2/images/empty.svg",
+"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
+},
 
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "year": "2020",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
-    }
+{
+"title": "Lorem ipsum dolor sit.",
+"year": "2023",
+"image": "https://vis-society.github.io/labs/2/images/empty.svg",
+"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
+},
+
+{
+"title": "Lorem ipsum dolor sit.",
+"year": "2021",
+"image": "https://vis-society.github.io/labs/2/images/empty.svg",
+"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
+},
+
+{
+"title": "Lorem ipsum dolor sit.",
+"year": "2020",
+"image": "https://vis-society.github.io/labs/2/images/empty.svg",
+"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, nobis ipsa laudantium quas eum veritatis ullam sint porro minima modi molestias doloribus cumque odit."
+}
 ]
