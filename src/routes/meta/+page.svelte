@@ -5,6 +5,7 @@
 <script>
     import * as d3 from "d3";
     import { onMount } from "svelte";
+    import Pie from "$lib/Pie.svelte";
 
     let data = [];
     let commits = [];
@@ -137,9 +138,12 @@ function handleMouseLeave() {
 
     let svg; // Define svg variable to hold reference to the svg element
     let brushSelection = null;
+    let selectedLines = [];
+    let languageBreakdown = [];
+    let selectedCommitIds = new Set(); 
 
-    // Call d3.brush() on the svg element inside a reactive block
-    $: {
+ // Call d3.brush() on the svg element inside a reactive block
+ $: {
     if (svg) {
         d3.select(svg).call(d3.brush().on("start brush end", brushed));
         // Move the dots and everything after the overlay to the end of their parent
@@ -148,36 +152,56 @@ function handleMouseLeave() {
 }
 
 
-    function brushed(evt) {
-        brushSelection = evt.selection;
-        console.log("Brushed event:", evt);
-
-        // Apply class to selected dots
-        d3.selectAll('.dots circle')
-             .classed('selected-dot', d => {
-                return brushSelection && isCommitSelected(d);
-        });
+function brushed (evt) {
+    brushSelection = evt.selection;
+	// Trigger Svelte's reactivity to update any dependent elements
+    // For example, updating the selection display or filtering data based on the selection
+    if (brushSelection) {
+        console.log("Current brush selection:", brushSelection);
+        // Add any additional logic needed when the selection changes
+        // For example, filtering the commits to those within the selection
+        updateSelectedCommits();
+    } else {
+        // Handle the case where the selection is cleared
+        console.log("Brush selection cleared");
     }
-
-
-    function isCommitSelected(commit) { 
-        if (!brushSelection) {
-            return false;
-    }
-
-    const [x0, x1] = brushSelection[0];
-    const [y0, y1] = brushSelection[1];
-    const commitX = xScale(commit.datetime);
-    const commitY = yScale(commit.hourFrac);
-    return commitX >= x0 && commitX <= x1 && commitY >= y0 && commitY <= y1;
 }
 
-let selectedLines = [];
-let languageBreakdown = [];
+
+
+function isCommitSelected (commit) {
+	if (!brushSelection) {
+		return false;
+	}
+	// Extract the top-left ([0]) and bottom-right ([1]) corners of the selection
+    const [[x0, y0], [x1, y1]] = brushSelection;
+
+    // Map the commit's datetime and hourFrac to pixel coordinates
+    const commitX = xScale(commit.datetime);
+    const commitY = yScale(commit.hourFrac);
+
+    // Check if the commit's coordinates are within the brush selection bounds
+    return x0 <= commitX && commitX <= x1 && y0 <= commitY && commitY <= y1;
+}
+
 
 $: selectedCommits = brushSelection ? commits.filter(isCommitSelected) : [];
 $: hasSelection = brushSelection && selectedCommits.length > 0;
 $: selectedLines = (hasSelection ? selectedCommits : commits).flatMap(d => d.lines);
+
+
+$: languageBreakdown = d3.rollups(
+    selectedLines,
+    v => v.length, // The reducer function to count lines
+    d => d.language // The key to group by, which is the language of each line
+);
+
+//step 5.6
+$: pieChartData = languageBreakdown.map(([language, lines]) => ({
+    label: language,
+    value: lines
+}));
+
 
 </script>
 
@@ -231,7 +255,6 @@ $: selectedLines = (hasSelection ? selectedCommits : commits).flatMap(d => d.lin
         cy={yScale(commit.hourFrac)}
         r="5"
         fill="steelblue"
-        class:selected={isCommitSelected(commit) ? 'selected-dot' : ''}
         on:mouseenter={event => handleMouseEnter(event, index)}
         on:mouseleave={handleMouseLeave}
       />
@@ -242,6 +265,22 @@ $: selectedLines = (hasSelection ? selectedCommits : commits).flatMap(d => d.lin
 
 <p>{hasSelection ? selectedCommits.length : "No"} commits selected</p>
 
+
+{#if languageBreakdown.length > 0}
+    <h3>Language Breakdown</h3>
+    <ul>
+        {#each languageBreakdown as [language, lines]}
+            <li>
+                {language}: {formatPercent(lines / totalSelectedLines)}
+            </li>
+        {/each}
+    </ul>
+{/if}
+
+
+{#if pieChartData && pieChartData.length > 0}
+    <Pie {pieChartData} />
+{/if}
 
 
 <style>
@@ -329,10 +368,6 @@ dl.info {
     }
 
     .selected-dot {
-        fill: red; /* Change the color to your desired color */
-        stroke: #fff; /* Add stroke color if needed */
-        stroke-width: 2; /* Adjust stroke width if needed */
+    fill: red; /* Change the fill color to visually indicate selection */
     }
-
 </style>
-
