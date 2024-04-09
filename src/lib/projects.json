@@ -25,10 +25,11 @@
 },
 
 {
-"title": "Architecto minima sed omnis?",
-"year": "2023",
-"image": "https://vis-society.github.io/labs/2/images/empty.svg",
-"description": "Est, reiciendis aspernatur debitis maxime et itaque animi sit quod quo, tempore incidunt tempora dignissimos exercitationem enim numquam quam quaerat optio laborum ut unde hic delectus laboriosam? Quasi, cupiditate corporis."
+"title": "Bikewatching in Cambridge Boston Area",
+"year": "2024",
+"image": "bikewatching/static/Images/bike.jpg",
+"description": " This project shows bike lines, bike stations and bike traffic flow in Boston/Cambridge.",
+"url":"https://kghanizada.github.io/bikewatching/"
 },
 
 {
