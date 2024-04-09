@@ -7,14 +7,14 @@ export let year;
 
 
 <article>
-<a href={p.url}>
-<svelte:element this={"h" + hLevel}>{p.title}</svelte:element>
-<img class="fit-picture" src={p.image} alt="">
-<p>{p.description}</p> <!-- Use p.description instead of info.description -->
-{#if year}
-<p class="year">{year}</p> <!-- Display the year if provided -->
-{/if}
-</a>
+    <a href={p.url}>
+        <svelte:element this={"h" + hLevel}>{p.title}</svelte:element>
+        <img class="fit-picture" src={p.image} alt="">
+        <p>{p.description}</p> <!-- Use p.description instead of info.description -->
+    {#if year}
+        <p class="year">{year}</p> <!-- Display the year if provided -->
+    {/if}
+    </a>
 </article>
 
 
