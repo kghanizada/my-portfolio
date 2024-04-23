@@ -3,6 +3,13 @@
     import * as d3 from "d3";
     import { onMount } from "svelte";
     import Pie from "$lib/Pie.svelte";
+    import {
+        computePosition,
+        autoPlacement,
+        offset,
+    } from '@floating-ui/dom';  
+    import FileLines from './FileLines.svelte';
+    import { flip } from "svelte/animate";
 
     let data = [];
     let commits = [];
@@ -15,6 +22,10 @@
         left: margin.left
     };
 
+    let commitProgress = 100;
+    let filteredCommits = [];
+    let filteredLines = [];
+    let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
 
     usableArea.width = usableArea.right - usableArea.left;
@@ -22,11 +33,9 @@
 
     let hoveredIndex = -1;
 
-    $: hoveredCommit = commits[hoveredIndex] ?? {};
+    $: hoveredCommit = filteredCommits[hoveredIndex] ?? {};
 
-    let cursor = {x: 0, y: 0};
-
-
+    
 
     onMount(async () => {
         data = await d3.csv("loc.csv", row => ({
@@ -55,7 +64,6 @@
                 totalLines: lines.length
 
             };
-
             
             Object.defineProperty(ret, "lines", {
                 value: lines,
@@ -74,7 +82,6 @@
     });
 
 
-
     $: maxDepth = d3.max(data, d => d.depth)
     $: meanDepth = d3.mean(data, d => d.depth)
     $: meanLength = d3.max(data, d => d.length)
@@ -84,7 +91,7 @@
     $: workByPeriod = d3.rollups(data, v => v.length, d => d.datetime.toLocaleString("en", {dayPeriod: "short"}))
     $: maxPeriod = d3.greatest(workByPeriod, (d) => d[1])?.[0];
     $: xScale = d3.scaleTime()
-        .domain(d3.extent(data, d => d.datetime))
+        .domain(d3.extent(filteredLines, d => new Date(d.datetime)))
         .range([usableArea.left, usableArea.right])
         .nice();
 
@@ -98,7 +105,6 @@
         .range([2, 30])
         .nice();
 
-        
 
     let svg;
 
@@ -118,38 +124,31 @@
 
     let brushSelection;
 
-    function brushed (evt) {
-        brushSelection = evt.selection
-    }
+    // Update the brushed() function to use filteredCommits and filteredLines
+    function brushed(evt) {
+    let brushSelection = evt.selection;
+    selectedCommits = !brushSelection ? [] : filteredCommits.filter(commit => {
+        let min = { x: brushSelection[0][0], y: brushSelection[0][1] };
+        let max = { x: brushSelection[1][0], y: brushSelection[1][1] };
+        let x = xScale(commit.datetime);
+        let y = yScale(commit.hourFrac);
 
-    
+        return x >= min.x && x <= max.x && y >= min.y && y <= max.y;
+    });
+}
 
     function isCommitSelected(commit) {
-        if (!brushSelection) {
-            return false;
-        } else {
-            // Assuming brushSelection[0] is the top-left corner and brushSelection[1] is the bottom-right corner
-            let min = {x: brushSelection[0][0], y: brushSelection[0][1]};
-            let max = {x: brushSelection[1][0], y: brushSelection[1][1]};
-
-            // Scale commit properties to the same coordinate space
-            let x = xScale(commit.datetime);
-            let y = yScale(commit.hourFrac);
-
-            // Check if commit is within the bounding box
-            return x >= min.x && x <= max.x && y >= min.y && y <= max.y;
-        }
-
+        return selectedCommits.includes(commit);
     }
 
+    let selectedCommits = [];
 
     let selectedCommentIndex = -1;
-    let selectedCommits, hasSelection, selectedLines, languageBreakdown, pieData;
+    let hasSelection, selectedLines, languageBreakdown, pieData;
 
     $: {
-        selectedCommits = brushSelection ? commits.filter(isCommitSelected) : [];
-        hasSelection = brushSelection && selectedCommits.length > 0;
-        selectedLines = (hasSelection ? selectedCommits : commits).flatMap(d => d.lines);
+        hasSelection = selectedCommits.length > 0;
+        selectedLines = (hasSelection ? selectedCommits : filteredCommits).flatMap(d => d.lines);
         languageBreakdown = d3.rollups(selectedLines, v => v.length, d => d.type);
         pieData = languageBreakdown.map(([language, count]) => {
             return { value: ((count / selectedLines.length) * 100).toFixed(1), label: language };
@@ -157,7 +156,53 @@
         console.log(pieData)
     }
 
+    let commitTooltip;
+    let tooltipPosition = {x: 0, y: 0};
+    
+    async function dotInteraction (index, evt) {
+    // code will go here
+        if (evt.type === "mouseenter" || evt.type === "focus"|| evt.type === "click" || (evt.type === "keyup" && evt.key === "Enter" )) {
+             //added these three to make the pie chart reactive when hovered over the dots
+             hoveredIndex = index
+             let selectedCommit = commits[index];
+             selectedCommits = [selectedCommit];
+            // dot hovered
+             let hoveredDot = evt.target;
+            tooltipPosition = await computePosition(hoveredDot, commitTooltip, {
+            strategy: "fixed", // because we use position: fixed
+            middleware: [
+            offset(5), // spacing from tooltip to dot
+            autoPlacement() // see https://floating-ui.com/docs/autoplacement
+            ],
+    });
+        }
+        else if (evt.type === "mouseleave" || evt.type === "blur") {
+            // dot unhovered
+            hoveredIndex = -1
+            //added these three to make the pie chart reactive when hovered over the dots
+            selectedCommits = [];
+        
+        }
+    }
+
+
+    $: timeScale = d3.scaleTime(
+        d3.extent(commits,(d) => d.datetime),
+        [0, 100],
+    )
+
+    $: commitMaxTime = timeScale.invert(commitProgress);
+
+    $: console.log("current progress", commitProgress);
+    $: console.log("current progress", commitMaxTime);
+
+    // Add reactivity declaration for filteredCommits and filteredLines
+    $: filteredCommits = commits.filter(commit => commit.datetime <= commitMaxTime);
+    $: filteredLines = data.filter(line => new Date(line.datetime) <= commitMaxTime);
+
+    
 </script>
+
 
 
 
@@ -168,6 +213,20 @@
 
 
 <h1>Meta</h1>
+
+<p> This page includes stats about the code of this website. </p>
+
+
+<label class="filter-label">
+    Show commits until:
+    <input type="range" min="0" max="100" bind:value={commitProgress} style="width: 100%;" />
+<time>{commitMaxTime.toLocaleString()}</time>
+</label>
+
+<Pie data={pieData} bind:selectedIndex={selectedCommentIndex} colors={colors} />
+
+
+<FileLines lines={filteredLines} colors={colors} />
 
 <dl class="stats">
 
@@ -186,9 +245,8 @@
     <dt>Maximum Period</dt>
     <dd>{maxPeriod}</dd>
 
-
-
 </dl>
+
 
 
 
@@ -197,20 +255,31 @@
     <g transform="translate({usableArea.left}, 0)" bind:this={yAxis} />
     <g class="gridlines" transform="translate({usableArea.left}, 0)" bind:this={yAxisGridlines} />
     <g class="dots">
-        {#each commits as commit, index }
+        {#each commits as commit, index (commit.id) }
             <circle
-                on:mouseenter={evt => {
-                    hoveredIndex = index;
-                    cursor = {x: evt.x, y: evt.y};
+                on:mouseenter={evt => dotInteraction(index, evt)}
+                on:mouseleave={evt => dotInteraction(index, evt)}
+                on:focus={evt => dotInteraction(index, evt)}
+                on:blur={evt => dotInteraction(index, evt)}
+                on:click={evt => dotInteraction(index, evt)}
+                on:keyup={evt => {
+                    if (evt.key === "Enter") {
+                        dotInteraction(index, evt);
+                    }
                 }}
-
-                on:mouseleave={evt => hoveredIndex = -1}
+                tabindex="0"
+                aria-describedby="commit-tooltip"
+                aria-haspopup="true"
                 cx={ xScale(commit.datetime) }
                 cy={ yScale(commit.hourFrac) }
                 r={ rScale(commit.totalLines) }
                 class:circle-selected={isCommitSelected(commit)}
                 class:circle-default={!isCommitSelected(commit)}
+                key={commit.id}
+                animate:flip
             />
+        
+            
         {/each}
     </g>
 
@@ -218,7 +287,8 @@
 
 
 
-<dl class="info tooltip" hidden={hoveredIndex === -1} style="top: {cursor.y}px; left: {cursor.x}px">
+<dl class="info tooltip" bind:this={commitTooltip} hidden={hoveredIndex === -1} style="top: {tooltipPosition.y}px; left: {tooltipPosition.x}px" >
+    
     <dt>Commit</dt>
     <dd><a href="{ hoveredCommit.url }" target="_blank">{ hoveredCommit.id }</a></dd>
 
@@ -243,7 +313,7 @@
 
 <p>{hasSelection ? selectedCommits.length : "No"} commits selected</p>
 
-<Pie data={pieData} bind:selectedIndex={selectedCommentIndex} />
+
 
 
 <style>
@@ -327,13 +397,17 @@
     }
 
     circle {
-        transition: 200ms;
+        transition: 0.1ms;
         fill-opacity: 0.3;
         fill:darkred ;
         &:hover {
             transform: scale(2.5);
             transform-origin: center;
             transform-box: fill-box;
+        }
+
+        @starting-style {
+        r: 0; /* Define the starting state for the radius */
         }
     }
 
@@ -342,4 +416,30 @@
         transition: fill 200ms;
     }
 
+
+    .filter-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px; /* Add some space below the slider container */
+    }
+
+     /* Slider styles */
+     input[type="range"] {
+        flex: 1; /* Make the slider fill the available space */
+        height: 5px; /* Set the height of the slider */
+        background-color: #ddd; /* Set the background color */
+        border: none; /* Remove border */
+        border-radius: 5px; /* Apply border radius */
+        outline: none; /* Remove outline */
+        margin-right: 10px; /* Add some space between slider and time element */
+    }
+
+    /* Time element styles */
+    time {
+        font-size: 14px; /* Adjust font size */
+        color: #555; /* Set text color */
+    }
+
 </style>
+

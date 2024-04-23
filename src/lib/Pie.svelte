@@ -1,25 +1,23 @@
 <script>
 import * as d3 from 'd3';
+
+
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-    
 export let data = [];
 export let selectedIndex = -1;
+export let colors = d3.scaleOrdinal(d3.schemeTableau10); // Export colors scale
 
-    
-
-let sliceGenerator = d3.pie().value(d => d.value);
+let sliceGenerator = d3.pie().value(d => d.value).sort(null);
 
 // Declare variables
 let arcData = [];
 let arcs = [];
-let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
 // Use a reactive statement to recalculate arcData and arcs when data changes
 $: {
 arcData = d3.pie().value(d => d.value)(data);
 arcs = arcData.map(d => arcGenerator(d));
 }
-
 
 function toggleWedge(index, event) {
 // Check if the event is triggered by Enter key or if event.key doesn't exist (for mouse click)
@@ -28,40 +26,43 @@ selectedIndex = selectedIndex === index ? -1 : index;
 }
 }
 
+let pieData;
+$: {
+    pieData = d3.sort(data, d => d.label);
+	pieData = data.map((d, i) => ({...d, ...arcData[i], arc: arcs[i]}));
+};
+
 </script>
 
 <main>
-<div class="container">
-<svg viewBox="-50 -50 100 100">
-{#each arcs as arc, index}
-<path 
-d={arc} 
-fill={colors(index)}
-class:selected={selectedIndex === index}
-style="
---start-angle: { arc.startAngle }rad;
---end-angle: { arc.endAngle }rad;"
-tabindex="0"
-role="button"
-aria-label={`Select ${data[index].label}`}
-on:click={e => toggleWedge(index, e)}
-on:keyup={e => toggleWedge(index, e)}
-/>
-{/each}
-            
-</svg>
+    <div class="container">
+        <svg viewBox="-50 -50 100 100">
+            {#each pieData as d, index}
+                <path 
+                    d={d.arc} 
+                    fill={colors(index)}
+                    class:selected={selectedIndex === index}
+                    style="
+                        --start-angle: { d.arc.startAngle }rad;
+                        --end-angle: { d.arc.endAngle }rad;"
+                    tabindex="0"
+                    role="button"
+                    aria-label={`Select ${d.label}`}
+                    on:click={e => toggleWedge(index, e)}
+                    on:keyup={e => toggleWedge(index, e)}
+                />
+            {/each}
+        </svg>
 
-<ul class="legend">
-{#each data as d, index}
-<li style="--color: { colors(index) }">
-<span class="swatch" style="background-color: { colors(index) }"></span>
-{d.label} <em>({d.value})</em>
-</li>
-{/each}
-</ul>
-</div>
-
-
+        <ul class="legend">
+            {#each pieData as d, index}
+                <li style="--color: { colors(index) }">
+                    <span class="swatch" style="background-color: { colors(index) }"></span>
+                    {d.label} <em>({d.value})</em>
+                </li>
+            {/each}
+        </ul>
+    </div>
 </main>
 
 <style>
