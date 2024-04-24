@@ -40,7 +40,7 @@ $: {
             {#each pieData as d, index}
                 <path 
                     d={d.arc} 
-                    fill={colors(index)}
+                    fill={ colors(d.id ?? d.label) }
                     class:selected={selectedIndex === index}
                     style="
                         --start-angle: { d.arc.startAngle }rad;
@@ -56,8 +56,8 @@ $: {
 
         <ul class="legend">
             {#each pieData as d, index}
-                <li style="--color: { colors(index) }">
-                    <span class="swatch" style="background-color: { colors(index) }"></span>
+                <li style="--color: { colors(d.id ?? d.label) }">
+                    <span class="swatch" style="background-color: { colors(d.id ?? d.label) }"></span>
                     {d.label} <em>({d.value})</em>
                 </li>
             {/each}

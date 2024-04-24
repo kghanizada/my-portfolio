@@ -217,16 +217,9 @@
 <p> This page includes stats about the code of this website. </p>
 
 
-<label class="filter-label">
-    Show commits until:
-    <input type="range" min="0" max="100" bind:value={commitProgress} style="width: 100%;" />
-<time>{commitMaxTime.toLocaleString()}</time>
-</label>
 
 <Pie data={pieData} bind:selectedIndex={selectedCommentIndex} colors={colors} />
 
-
-<FileLines lines={filteredLines} colors={colors} />
 
 <dl class="stats">
 
@@ -246,9 +239,6 @@
     <dd>{maxPeriod}</dd>
 
 </dl>
-
-
-
 
 <svg viewBox="0 0 {width} {height}" bind:this={svg}>
     <g transform="translate(0, {usableArea.bottom})" bind:this={xAxis} />
@@ -285,6 +275,13 @@
 
 </svg>
 
+<label class="filter-label">
+    Show commits until:
+    <input type="range" min="0" max="100" bind:value={commitProgress} style="width: 100%;" />
+<time>{commitMaxTime.toLocaleString()}</time>
+</label>
+
+<FileLines lines={filteredLines} colors={colors} />
 
 
 <dl class="info tooltip" bind:this={commitTooltip} hidden={hoveredIndex === -1} style="top: {tooltipPosition.y}px; left: {tooltipPosition.x}px" >
@@ -312,6 +309,9 @@
 
 
 <p>{hasSelection ? selectedCommits.length : "No"} commits selected</p>
+
+
+
 
 
 

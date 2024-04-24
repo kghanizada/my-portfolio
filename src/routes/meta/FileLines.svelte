@@ -1,8 +1,9 @@
 <script>
     import * as d3 from "d3";
+    import { flip as originalFlip } from "svelte/animate";
     export let lines = []; // Input prop to receive lines data
     let files = [];
-    let colors = d3.scaleOrdinal(d3.schemeTableau10);  // Create an ordinal scale for colors
+    export let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
     // Group lines by file and convert to {name, lines} objects
     $: {
@@ -13,13 +14,18 @@
         // Sort files by number of lines in descending order
         files = d3.sort(files, (a, b) => b.lines.length - a.lines.length);
     }
+
+    function getFlip () {
+	return originalFlip;
+    }
+    $: flip = getFlip(files);
    
 </script>
 
 <!-- Display filenames and unit visualization -->
 <dl class="files">
     {#each files as file (file.name) }
-        <div class="file-entry">
+        <div class="file-entry" animate:flip>
             <dt><code>{file.name}</code> <small>({file.lines.length} lines)</small></dt>
             <dd>
                 {#each file.lines as line (line.line) }
