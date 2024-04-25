@@ -10,7 +10,7 @@
         .pie()
         .value((d) => d.value)
         .sort(null);
-    let transitionDuration = 100;
+    let transitionDuration = 1000;
 
     // Declare variables
     let arcData = [];
@@ -76,7 +76,7 @@
             duration: transition.duration,
             css: (t, u) => {
                 // t is a number between 0 and 1 that represents the transition progress; u is 1 - t
-                return `d: ${transition.interpolator(t)}`;
+                return `d: ${transition.interpolator(transition.type === "out" ? u : t)}`;
             },
     }
 }
@@ -98,7 +98,8 @@
         }
 
         let from = d_old ? { ...d_old } : getEmptyArc(label, oldData);
-        let to = { ...d };
+        let to = d? { ...d } : getEmptyArc(label, pieData);
+
         let angleInterpolator = d3.interpolate(from, to);
 
         let interpolator = (t) =>
@@ -194,8 +195,8 @@
 
     /* Add transition effect */
     path {
-        transition-property: transform, opacity, fill;
         transition: opacity 0.3s ease; /* Adjust timing and easing as needed */
+        transition-property: transform, opacity, fill;
         /* Calculate angle and midpoint angle */
         --angle: calc(var(--end-angle) - var(--start-angle));
         --mid-angle: calc(var(--start-angle) + var(--angle) / 2);
