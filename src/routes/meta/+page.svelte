@@ -295,14 +295,26 @@
 
 <Scrolly bind:progress={commitProgress}> 
 	<!-- Story here -->
-    {#each commits as commit, index }
         <p>
-            On {commit.datetime.toLocaleString("en", {dateStyle: "full", timeStyle: "short"})},
-            I made <a href="{commit.url}" target="_blank">{ index > 0 ? 'another glorious commit' : 'my first commit, and it was glorious' }</a>.
-            I edited {commit.totalLines} lines across { d3.rollups(commit.lines, D => D.length, d => d.file).length } files.
-            Then I looked over all I had made, and I saw that it was very good.
-        </p>
-    {/each}
+            In the realm of software development, each line of code tells a story—a tale of creativity, problem-solving, and collaboration. 
+            As the codebase evolves, so does the narrative it weaves. Let's embark on a journey through time and code, exploring the rich 
+            tapestry of commits and contributions that shape our digital landscape. </p>
+        <p> At the heart of our narrative lie two powerful visualizations: a scatterplot and a pie chart, each offering a unique perspective 
+            on the inner workings of our website's codebase. The scatterplot paints a picture of time and activity, plotting each commit as a 
+            point in space, while the pie chart slices through the data, revealing the distribution of changes across different files. </p>
+        <p> Imagine the scene: it's a crisp morning, the sun just peeking over the horizon, as the first lines of code come to life. With each
+            keystroke, a commitment is made—to innovation, to progress, to excellence. "My first commit," you proclaim proudly, laying the 
+            foundation for what is to come.</p>
+        <p> As the days turn into weeks, and the weeks into months, the codebase grows, a testament to your dedication and expertise. With 
+            each passing commit, you delve deeper into the intricacies of the project, leaving your mark on every line you touch.</p>
+        <p> But it's not just about quantity—it's about quality. Each commit represents a step forward, a refinement of ideas, a strengthening 
+            of the codebase. You pour over your work, ensuring that every line is crafted with care, every function optimized for efficiency.</p>
+        <p> And so the story unfolds, a symphony of code and creativity, with each commit adding another chapter to the tale. From the humble
+            beginnings of "my first commit" to the culmination of your efforts, you look back with pride on all that you've accomplished. </p>
+        <p> But the journey doesn't end here—it's just the beginning. As you continue to code, to innovate, to push the boundaries of what's 
+            possible, the story continues to evolve, with each commit paving the way for the future.</p>
+        <p> So let us raise our virtual glasses to the commits that have come before, and to those that are yet to come. For in the world of
+            software development, the story never truly ends—it simply grows with each line of code, each commit, each contribution.</p>
 
 	<svelte:fragment slot="viz">
 		<!-- Visualizations here -->
@@ -358,14 +370,32 @@
     --scrolly-viz-width="1.5fr"
      > 
 	<!-- Story here -->
-    {#each commits as commit, index }
         <p>
-            On {commit.datetime.toLocaleString("en", {dateStyle: "full", timeStyle: "short"})},
-            I made <a href="{commit.url}" target="_blank">{ index > 0 ? 'another glorious commit' : 'my first commit, and it was glorious' }</a>.
-            I edited {commit.totalLines} lines across { d3.rollups(commit.lines, D => D.length, d => d.file).length } files.
-            Then I looked over all I had made, and I saw that it was very good.
-        </p>
-    {/each}
+        In the realm of software development, every line of code is a brushstroke, painting a picture of functionality, elegance, 
+        and efficiency. Let us delve into the heart of our codebase, where the FileLines component reigns supreme, revealing the 
+        intricate patterns and structures that define our project's essence. </p>
+        <p>
+        As the journey unfolds, we find ourselves immersed in a world of code, where each commit represents a step forward in 
+        our quest for perfection. With every keystroke, we shape the destiny of our project, leaving behind a trail of edits and 
+        revisions that tell the story of our progress.</p>
+        <p>
+        Picture this: a quiet evening, the soft glow of the monitor casting shadows across the room, as I embark on my coding journey.
+        With determination in my heart and a vision in my mind, I make my first commit—a humble yet glorious declaration of intent.</p>
+        <p>
+        As time passes, the FileLines component becomes my canvas, each line of code a stroke of inspiration. With each commit, I weave a 
+        tapestry of functionality, refining, optimizing, and perfecting the intricate web of logic that powers our project.</p>
+        <p>
+        But it's not just about the quantity of lines edited—it's about the impact they have on the grand design. With each edit, I scrutinize,
+        analyze, and evaluate, ensuring that every line serves a purpose, every function contributes to the greater whole. </p>
+        <p>
+        And so the story unfolds, a symphony of code and creativity, with the FileLines component at its core. From the humble beginnings of
+        my first commit to the culmination of my efforts, I look back with pride on the journey I've undertaken.</p>
+        <p>
+        But the journey doesn't end here—it's just the beginning. As I continue to code, to innovate, to push the boundaries of what's possible, 
+        the FileLines component remains a constant companion, guiding me towards new heights of achievement.</p>
+        <p>
+        So let us raise our virtual glasses to the FileLines component—to the lines of code that define our project's essence, and to the journey 
+        that lies ahead. For in the world of software development, every line counts, every commit matters, and every contribution shapes the future.</p>
 
 	<svelte:fragment slot="viz">
 		<!-- Visualizations here -->
