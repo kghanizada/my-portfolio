@@ -10,7 +10,7 @@
         .pie()
         .value((d) => d.value)
         .sort(null);
-    let transitionDuration = 1000;
+    let transitionDuration = 100;
 
     // Declare variables
     let arcData = [];
@@ -38,6 +38,7 @@
         d3.selectAll(wedgeElements)
             .transition("arc")
             .duration(transitionDuration)
+            .ease(d3.easeLinear) // Add linear easing
             .styleTween("d", function (_, index) {
                 let wedge = this;
                 let label = Object.keys(wedges)[index];
@@ -77,8 +78,8 @@
                 // t is a number between 0 and 1 that represents the transition progress; u is 1 - t
                 return `d: ${transition.interpolator(t)}`;
             },
-        };
     }
+}
 
     function transitionArc(wedge, label) {
         label ??= Object.entries(wedges).find(([label, w]) => w === wedge)[0];
